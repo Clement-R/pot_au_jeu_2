@@ -80,6 +80,7 @@ public class GameStateManager : MonoBehaviour
 
     private void GameOver()
     {
+        Time.timeScale = 0f;
         IsGameOver = true;
         MenuManager.Instance.ShowMenu(EMenu.GAMEOVER);
         OnGameOver?.Invoke();

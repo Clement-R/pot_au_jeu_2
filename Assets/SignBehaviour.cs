@@ -21,6 +21,9 @@ public class SignBehaviour : MonoBehaviour
 
     [SerializeField] private SpriteRenderer m_sign;
 
+    [SerializeField] private GameObject m_fx;
+    [SerializeField] private Transform m_fxTransform;
+
     private void Start()
     {
         ChangeSign(EDirection.MIDDLE);
@@ -28,6 +31,9 @@ public class SignBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (GameStateManager.Instance.IsGameOver || GameStateManager.Instance.Pause)
+            return;
+
         if (Input.GetKeyDown(m_rightKey))
             ChangeSign(EDirection.RIGHT);
         else if (Input.GetKeyDown(m_middleKey))
@@ -52,6 +58,8 @@ public class SignBehaviour : MonoBehaviour
                 m_sign.sprite = m_rightSign;
                 break;
         }
+
+        GameObject go = Instantiate(m_fx, m_fxTransform.position, Quaternion.identity);
     }
 }
 

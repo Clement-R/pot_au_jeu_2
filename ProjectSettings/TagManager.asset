@@ -44,6 +44,9 @@ TagManager:
   - name: Agent
     uniqueID: 3420632697
     locked: 0
+  - name: Sign
+    uniqueID: 1960933561
+    locked: 0
   - name: UI
     uniqueID: 3931189595
     locked: 0

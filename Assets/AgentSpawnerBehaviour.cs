@@ -19,7 +19,8 @@ public class AgentSpawnerBehaviour : MonoBehaviour
     {
         while(!GameStateManager.Instance.IsGameOver)
         {
-            AgentBehaviour agent = AgentSettings.Instance.Agents[Random.Range(0, AgentSettings.Instance.Agents.Count)];
+            int rand = Random.Range(0, AgentSettings.Instance.Agents.Count);
+            AgentBehaviour agent = AgentSettings.Instance.Agents[rand];
             SpawnAgent(agent.gameObject);
             yield return new WaitForSeconds(m_delayBetweenSpawn);
         }
