@@ -36,7 +36,7 @@ public class GameStateManager : MonoBehaviour
 
     private void Update()
     {
-        if (Gauges.Any(e => e.Gauge.Value <= 0 || e.Gauge.Value > m_gaugeMaxValue))
+        if (Gauges.Any(e => e.Gauge.Value <= 0 || e.Gauge.Value >= m_gaugeMaxValue))
             Debug.Log("Game over");
 
         if (Input.GetKeyDown(KeyCode.R))
