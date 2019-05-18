@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -47,6 +48,9 @@ public class GameStateManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
             Pause();
+
+        if (Input.GetKeyDown(KeyCode.O))
+            RestartGame();
     }
 
     private void Pause()
@@ -74,6 +78,12 @@ public class GameStateManager : MonoBehaviour
         IsGameOver = true;
         MenuManager.Instance.ShowMenu(EMenu.GAMEOVER);
         OnGameOver?.Invoke();
+    }
+
+    public void RestartGame()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     private void AgentSpawned(AgentBehaviour p_agent)
