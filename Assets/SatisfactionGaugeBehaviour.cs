@@ -31,13 +31,16 @@ public class SatisfactionGaugeBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (GameStateManager.Instance.IsGameOver)
+            return;
+
         switch (m_mood)
         {
             case ECreatureMood.GOOD:
-                ChangeInfluence(0.005f);
+                ChangeInfluence(0.05f);
                 break;
             case ECreatureMood.BAD:
-                ChangeInfluence(-0.005f);
+                ChangeInfluence(-0.05f);
                 break;
         }
 
@@ -51,9 +54,11 @@ public class SatisfactionGaugeBehaviour : MonoBehaviour
 
     private IEnumerator _ChangeMood()
     {
-        m_mood = (ECreatureMood)Random.Range(0, Enum.GetNames(typeof(ECreatureMood)).Length);
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(_ChangeMood());
+        while(!GameStateManager.Instance.IsGameOver)
+        {
+            m_mood = (ECreatureMood)Random.Range(0, Enum.GetNames(typeof(ECreatureMood)).Length);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
 

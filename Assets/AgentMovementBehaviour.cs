@@ -12,15 +12,30 @@ public class AgentMovementBehaviour : MonoBehaviour
         private set;
     }
 
+    private Coroutine m_currentMovement = null;
+
     private void Start()
     {
-        StartCoroutine(
+        GameStateManager.Instance.OnGameOver += GameOver;
+
+        m_currentMovement = StartCoroutine(
             _MoveToPosition(
                 AgentSettings.Instance.CenterTransform.position,
                 AgentSettings.Instance.TimeToMoveFromSideToCenter,
                 MoveToSignDirection
             )
         );
+    }
+
+    private void OnDestroy()
+    {
+        m_currentMovement = null;
+        GameStateManager.Instance.OnGameOver -= GameOver;
+    }
+
+    private void GameOver()
+    {
+        StopCoroutine(m_currentMovement);
     }
 
     private IEnumerator _MoveToPosition(Vector2 p_position, float p_timeToMove, Action OnMovementEnd, bool p_scaling = false)
@@ -63,7 +78,7 @@ public class AgentMovementBehaviour : MonoBehaviour
                 break;
         }
 
-        StartCoroutine(
+        m_currentMovement = StartCoroutine(
             _MoveToPosition(
                 finalPosition,
                 AgentSettings.Instance.TimeToMoveFromCenterToCreature,

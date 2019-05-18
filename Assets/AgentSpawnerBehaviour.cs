@@ -15,8 +15,7 @@ public class AgentSpawnerBehaviour : MonoBehaviour
 
     private IEnumerator _GameStart()
     {
-        // TODO: Change with !GameOver when implemented
-        while(true)
+        while(!GameStateManager.Instance.IsGameOver)
         {
             AgentBehaviour agent = AgentSettings.Instance.Agents[Random.Range(0, AgentSettings.Instance.Agents.Count)];
             SpawnAgent(agent.gameObject);
