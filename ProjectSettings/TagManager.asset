@@ -47,6 +47,9 @@ TagManager:
   - name: Sign
     uniqueID: 1960933561
     locked: 0
+  - name: FX
+    uniqueID: 1820680113
+    locked: 0
   - name: UI
     uniqueID: 3931189595
     locked: 0
