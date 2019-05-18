@@ -18,6 +18,29 @@ public class AgentMovementBehaviour : MonoBehaviour
     {
         GameStateManager.Instance.OnGameOver += GameOver;
 
+        //if(waypoints.Count > 0)
+        //{
+        //    Vector3[] path = new Vector3[waypoints.Count];
+        //    for (int i = 0; i < waypoints.Count; i++)
+        //    {
+        //        path[i] = waypoints[i].position;
+        //    }
+
+        //    m_currentMovement = StartCoroutine(
+        //        _MoveToPosition(
+        //            AgentSettings.Instance.CenterTransform.position,
+        //            AgentSettings.Instance.TimeToMoveFromSideToCenter,
+        //            () => {
+        //                Debug.Log("GO ON PATH");
+        //                var ok = transform.DOPath(path, AgentSettings.Instance.TimeToMoveFromCenterToCreature, PathType.Linear, PathMode.Full3D);
+        //                return;
+        //            }
+        //        )
+        //    );
+        //    //transform.DOPath(waypoints.ToArray(), AgentSettings.Instance.TimeToMoveFromCenterToCreature, PathType.CubicBezier, PathMode.Full3D);
+        //    //return;
+        //}
+
         m_currentMovement = StartCoroutine(
             _MoveToPosition(
                 AgentSettings.Instance.CenterTransform.position,

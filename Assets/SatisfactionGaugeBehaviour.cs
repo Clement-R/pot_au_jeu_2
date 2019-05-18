@@ -33,7 +33,7 @@ public class SatisfactionGaugeBehaviour : MonoBehaviour
     {
         UpdateGaugeUI();
 
-        if (GameStateManager.Instance.IsGameOver)
+        if (GameStateManager.Instance.IsGameOver || GameStateManager.Instance.Pause)
             return;
 
         switch (m_mood)

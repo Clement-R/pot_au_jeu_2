@@ -18,12 +18,17 @@ public class GameStateManager : MonoBehaviour
         private set;
     }
 
+    public bool Pause
+    {
+        get;
+        private set;
+    } = false;
+
     [SerializeField] private List<DirectionGauge> Gauges;
     [SerializeField] private AgentSpawnerBehaviour Spawner;
 
     private float m_gaugeMaxValue;
-    private bool m_pause = false;
-
+    
     private void Awake()
     {
         Instance = this;
@@ -47,19 +52,19 @@ public class GameStateManager : MonoBehaviour
             GameOver();
 
         if (Input.GetKeyDown(KeyCode.P))
-            Pause();
+            TogglePause();
 
         if (Input.GetKeyDown(KeyCode.O))
             RestartGame();
     }
 
-    private void Pause()
+    public void TogglePause()
     {
         if (IsGameOver)
             return;
 
-        m_pause = !m_pause;
-        if(m_pause)
+        Pause = !Pause;
+        if(Pause)
         {
             Time.timeScale = 0f;
             MenuManager.Instance.ShowMenu(EMenu.PAUSE);
@@ -70,7 +75,7 @@ public class GameStateManager : MonoBehaviour
             MenuManager.Instance.CloseMenu();
         }
 
-        OnPause?.Invoke(m_pause);
+        OnPause?.Invoke(Pause);
     }
 
     private void GameOver()
@@ -82,8 +87,14 @@ public class GameStateManager : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1f;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void AgentSpawned(AgentBehaviour p_agent)
