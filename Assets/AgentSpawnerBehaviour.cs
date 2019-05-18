@@ -8,6 +8,8 @@ public class AgentSpawnerBehaviour : MonoBehaviour
 {
     public Action<AgentBehaviour> OnAgentSpawned;
 
+    [SerializeField] private float m_delayBetweenSpawn = 2.5f;
+
     private void Start()
     {
         StartCoroutine(_GameStart());
@@ -19,7 +21,7 @@ public class AgentSpawnerBehaviour : MonoBehaviour
         {
             AgentBehaviour agent = AgentSettings.Instance.Agents[Random.Range(0, AgentSettings.Instance.Agents.Count)];
             SpawnAgent(agent.gameObject);
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(m_delayBetweenSpawn);
         }
     }
 

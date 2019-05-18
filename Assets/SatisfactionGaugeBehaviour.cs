@@ -31,20 +31,20 @@ public class SatisfactionGaugeBehaviour : MonoBehaviour
 
     private void Update()
     {
+        UpdateGaugeUI();
+
         if (GameStateManager.Instance.IsGameOver)
             return;
 
         switch (m_mood)
         {
             case ECreatureMood.GOOD:
-                ChangeInfluence(0.05f);
+                ChangeInfluence(0.1f);
                 break;
             case ECreatureMood.BAD:
-                ChangeInfluence(-0.05f);
+                ChangeInfluence(-0.1f);
                 break;
         }
-
-        UpdateGaugeUI();
     }
 
     private void UpdateGaugeUI()
