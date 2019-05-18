@@ -48,6 +48,9 @@ public class GameStateManager : MonoBehaviour
 
     private void Pause()
     {
+        if (IsGameOver)
+            return;
+
         m_pause = !m_pause;
         if(m_pause)
         {
