@@ -23,8 +23,9 @@ public class CreatureEatFX : MonoBehaviour
     {
         if(p_direction == m_direction)
         {
-            Instantiate(m_fxPrefab, m_fxTransform.position, Quaternion.identity);
+            Instantiate(m_fxPrefab, m_fxTransform.position, m_fxTransform.rotation);
         }
+        SoundManager.Instance.PlayCreatureSound();
         p_agent.OnBeingEaten -= PlayFx;
     }
 }

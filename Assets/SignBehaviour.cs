@@ -60,6 +60,7 @@ public class SignBehaviour : MonoBehaviour
         }
 
         GameObject go = Instantiate(m_fx, m_fxTransform.position, Quaternion.identity);
+        SoundManager.Instance.PlaySignSound();
     }
 }
 

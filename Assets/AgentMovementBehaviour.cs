@@ -22,18 +22,28 @@ public class AgentMovementBehaviour : MonoBehaviour
     private void Start()
     {
         GameStateManager.Instance.OnGameOver += GameOver;
+        GameStateManager.Instance.OnPause += Pause;
 
         m_currentMovement = transform.DOPath(AgentSettings.Instance.PathToCenter,
                                              AgentSettings.Instance.TimeToMoveFromSideToCenter,
                                              PathType.Linear)
                                      .OnComplete(MoveToSignDirection)
                                      .SetEase(Ease.Linear);
+
+        if (GameStateManager.Instance.Pause)
+            Pause(true);
+    }
+
+    private void Pause(bool p_pause)
+    {
+        m_currentMovement.TogglePause();
     }
 
     private void OnDestroy()
     {
         m_currentMovement = null;
         GameStateManager.Instance.OnGameOver -= GameOver;
+        GameStateManager.Instance.OnPause -= Pause;
     }
 
     private void GameOver()
@@ -61,6 +71,7 @@ public class AgentMovementBehaviour : MonoBehaviour
 
     private IEnumerator _ShowExclamation()
     {
+        SoundManager.Instance.PlayExclamationSound();
         m_exclamation.SetActive(true);
         yield return new WaitForSeconds(AgentSettings.Instance.ExclamationDuration);
         m_exclamation.SetActive(false);

@@ -28,9 +28,22 @@ public class MenuManager : MonoBehaviour
                 break;
         }
 
-        m_currentMenu.alpha = 1f;
-        m_currentMenu.interactable = true;
-        m_currentMenu.blocksRaycasts = true;
+        StartCoroutine(_ShowMenu(m_currentMenu));
+    }
+
+    private IEnumerator _ShowMenu(CanvasGroup p_canvas)
+    {
+        var t = 0f;
+        var timeToMove = 0.5f;
+        while (t < 1)
+        {
+            t += Time.unscaledDeltaTime / timeToMove;
+            p_canvas.alpha = t;
+            yield return new WaitForSecondsRealtime(0.033f);
+        }
+
+        p_canvas.interactable = true;
+        p_canvas.blocksRaycasts = true;
     }
 
     public void CloseMenu()

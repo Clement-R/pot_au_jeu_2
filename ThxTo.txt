@@ -1,0 +1,10 @@
+Kenney
+	- Menu select sound
+SuperPowers asset pack
+	- Creature sounds
+Speedenza
+	- Whoosh sound on sign change
+Godowan
+	- Exclamation point appear sound
+Google font
+	- Font in tutorial

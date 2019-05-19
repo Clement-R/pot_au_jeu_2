@@ -9,10 +9,38 @@ public class AgentSpawnerBehaviour : MonoBehaviour
     public Action<AgentBehaviour> OnAgentSpawned;
 
     [SerializeField] private float m_delayBetweenSpawn = 2.5f;
+    [SerializeField] private AnimationCurve m_difficultyCurve;
+
+    private float m_lastSpawn = 0f;
+    private Coroutine m_routine = null;
+    private float m_gameTime = 0f;
 
     private void Start()
     {
-        StartCoroutine(_GameStart());
+        GameStateManager.Instance.OnPause += Toggle;
+        Toggle(GameStateManager.Instance.Pause);
+    }
+
+    private void Toggle(bool p_pause)
+    {
+        if (p_pause)
+        {
+            if (m_routine != null)
+            {
+                StopCoroutine(m_routine);
+                m_routine = null;
+            }
+        }
+        else
+        {
+            if(m_routine == null)
+                m_routine = StartCoroutine(_GameStart());
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnPause -= Toggle;
     }
 
     private IEnumerator _GameStart()
@@ -22,28 +50,24 @@ public class AgentSpawnerBehaviour : MonoBehaviour
             int rand = Random.Range(0, AgentSettings.Instance.Agents.Count);
             AgentBehaviour agent = AgentSettings.Instance.Agents[rand];
             SpawnAgent(agent.gameObject);
-            yield return new WaitForSeconds(m_delayBetweenSpawn);
+
+            yield return new WaitForSeconds(m_difficultyCurve.Evaluate(m_gameTime));
         }
+    }
+
+    private void Update()
+    {
+        if(!GameStateManager.Instance.IsGameOver && !GameStateManager.Instance.Pause)
+            m_gameTime += Time.deltaTime;
     }
 
     private void SpawnAgent(GameObject p_agent)
     {
-        //int rand = Random.Range(0, Enum.GetNames(typeof(ESide)).Length);
-        //ESide side = (ESide)rand;
-
-        //float yRotation = side == ESide.LEFT ? 0f : 180f;
-        //Quaternion rotation = Quaternion.Euler(0f, yRotation, 0f);
-
-        //Vector2 position;
-        //if(side == ESide.LEFT)
-        //    position = AgentSettings.Instance.LeftStartTransform.position;
-        //else
-        //    position = AgentSettings.Instance.RighStartTransform.position;
-
         Vector3 position = AgentSettings.Instance.PathToCenter[0];
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
         GameObject agent = Instantiate(p_agent, position, rotation);
         OnAgentSpawned?.Invoke(agent.GetComponent<AgentBehaviour>());
+        m_lastSpawn = Time.time;
     }
 }
 

@@ -12,6 +12,12 @@ public class GameStateManager : MonoBehaviour
     public Action OnGameOver;
     public Action<bool> OnPause;
 
+    public float Score
+    {
+        get;
+        private set;
+    } = 0f;
+
     public bool IsGameOver
     {
         get;
@@ -48,14 +54,17 @@ public class GameStateManager : MonoBehaviour
                 GameOver();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-            GameOver();
+        //if (Input.GetKeyDown(KeyCode.R))
+        //    GameOver();
 
-        if (Input.GetKeyDown(KeyCode.P))
-            TogglePause();
+        //if (Input.GetKeyDown(KeyCode.P))
+        //    TogglePause();
 
-        if (Input.GetKeyDown(KeyCode.O))
-            RestartGame();
+        //if (Input.GetKeyDown(KeyCode.O))
+        //    RestartGame();
+
+        if (!IsGameOver && !Pause)
+            Score += Time.deltaTime;
     }
 
     public void TogglePause()
@@ -78,6 +87,12 @@ public class GameStateManager : MonoBehaviour
         OnPause?.Invoke(Pause);
     }
 
+    public void FakePause()
+    {
+        Pause = !Pause;
+        OnPause?.Invoke(Pause);
+    }
+
     private void GameOver()
     {
         Time.timeScale = 0f;
@@ -95,6 +110,7 @@ public class GameStateManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 

@@ -80,7 +80,7 @@ public class FadingText : MonoBehaviour
             // Get the index of the first vertex used by this text element.
             int vertexIndex = textInfo.characterInfo[visibleCount].vertexIndex;
 
-            c0 = new Color32(255, 255, 255, 125);
+            c0 = new Color32(72, 68, 68, 125);
 
             newVertexColors[vertexIndex + 0] = c0;
             newVertexColors[vertexIndex + 1] = c0;
@@ -91,7 +91,7 @@ public class FadingText : MonoBehaviour
             {
                 vertexIndex = textInfo.characterInfo[visibleCount - 1].vertexIndex;
 
-                c0 = new Color32(255, 255, 255, 195);
+                c0 = new Color32(72, 68, 68, 195);
 
                 newVertexColors[vertexIndex + 0] = c0;
                 newVertexColors[vertexIndex + 1] = c0;
@@ -100,7 +100,7 @@ public class FadingText : MonoBehaviour
 
                 vertexIndex = textInfo.characterInfo[visibleCount - 2].vertexIndex;
 
-                c0 = new Color32(255, 255, 255, 255);
+                c0 = new Color32(72, 68, 68, 255);
 
                 newVertexColors[vertexIndex + 0] = c0;
                 newVertexColors[vertexIndex + 1] = c0;
@@ -118,7 +118,6 @@ public class FadingText : MonoBehaviour
 
             m_TextComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
 
-            yield return null;
             yield return null;
             yield return null;
 
@@ -141,10 +140,10 @@ public class FadingText : MonoBehaviour
             switch (count)
             {
                 case 0:
-                    c0 = new Color32(255, 255, 255, 195);
+                    c0 = new Color32(72, 68, 68, 195);
                     break;
                 case 1:
-                    c0 = new Color32(255, 255, 255, 255);
+                    c0 = new Color32(72, 68, 68, 255);
                     break;
             }
 
@@ -155,7 +154,6 @@ public class FadingText : MonoBehaviour
 
             m_TextComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
 
-            yield return null;
             yield return null;
             yield return null;
 
