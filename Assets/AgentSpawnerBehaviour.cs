@@ -40,7 +40,7 @@ public class AgentSpawnerBehaviour : MonoBehaviour
         //else
         //    position = AgentSettings.Instance.RighStartTransform.position;
 
-        Vector3 position = AgentSettings.Instance.LeftStartTransform.position;
+        Vector3 position = AgentSettings.Instance.PathToCenter[0];
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
         GameObject agent = Instantiate(p_agent, position, rotation);
         OnAgentSpawned?.Invoke(agent.GetComponent<AgentBehaviour>());

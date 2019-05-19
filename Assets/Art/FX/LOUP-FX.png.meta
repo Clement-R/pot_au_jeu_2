@@ -1,34 +1,49 @@
 fileFormatVersion: 2
-guid: b5569c0b82a8b1248857bcc6e7142c30
+guid: 709a0947fdfc9c64a988070e58bcd857
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9064676655218769202
-    second: PANNEAU-FX_0
+      213: -780505573982377162
+    second: LOUP-FX_0
   - first:
-      213: -5984485473733281353
-    second: PANNEAU-FX_1
+      213: -1161994881242534707
+    second: LOUP-FX_1
   - first:
-      213: 1982934761328295879
-    second: PANNEAU-FX_2
+      213: 4162644816302028087
+    second: LOUP-FX_2
   - first:
-      213: 5133115353153450884
-    second: PANNEAU-FX_3
+      213: -2036453205530055819
+    second: LOUP-FX_3
   - first:
-      213: -6447163043240413760
-    second: PANNEAU-FX_4
+      213: 8737378264718328673
+    second: LOUP-FX_4
   - first:
-      213: 2785979893011430338
-    second: PANNEAU-FX_5
+      213: 7252402004013892108
+    second: LOUP-FX_5
   - first:
-      213: -8413763322637773600
-    second: PANNEAU-FX_6
+      213: -2882231245403682056
+    second: LOUP-FX_6
   - first:
-      213: 362984003561982265
-    second: PANNEAU-FX_7
+      213: -5148258295058172737
+    second: LOUP-FX_7
   - first:
-      213: -7230492115475820849
-    second: PANNEAU-FX_8
+      213: -9016444866416359103
+    second: LOUP-FX_8
+  - first:
+      213: 7019984161170487316
+    second: LOUP-FX_9
+  - first:
+      213: 5645277493343901529
+    second: LOUP-FX_10
+  - first:
+      213: 5611787793538930006
+    second: LOUP-FX_11
+  - first:
+      213: 8771915932911718108
+    second: LOUP-FX_12
+  - first:
+      213: -7414090145203153205
+    second: LOUP-FX_13
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -125,7 +140,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PANNEAU-FX_0
+      name: LOUP-FX_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3f1b16c88e549d4dabbac05eb77fb27
-      internalID: -9064676655218769202
+      spriteID: 39807745abb1a9444ad3e508cb33cc35
+      internalID: -780505573982377162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PANNEAU-FX_1
+      name: LOUP-FX_1
       rect:
         serializedVersion: 2
         x: 512
@@ -160,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c48f62eafa123045af2c96aa3643e44
-      internalID: -5984485473733281353
+      spriteID: bea0aef6a33e3cf4294f53360e28f897
+      internalID: -1161994881242534707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PANNEAU-FX_2
+      name: LOUP-FX_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -181,14 +196,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02a88c36e5ea40e439dd05c6e7c9cef7
-      internalID: 1982934761328295879
+      spriteID: 7fe6acfd31ad8704c8efadbbfd8d5827
+      internalID: 4162644816302028087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PANNEAU-FX_3
+      name: LOUP-FX_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58df73ea7cd4ba14b910ca5adf815535
+      internalID: -2036453205530055819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LOUP-FX_4
       rect:
         serializedVersion: 2
         x: 0
@@ -202,14 +238,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dfdf8db86c6857428134f96f71a124e
-      internalID: 5133115353153450884
+      spriteID: cab6515b531900847a9567a375a861bc
+      internalID: 8737378264718328673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PANNEAU-FX_4
+      name: LOUP-FX_5
       rect:
         serializedVersion: 2
         x: 512
@@ -223,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 294443eb3d0fb1a45b0e23db746be8af
-      internalID: -6447163043240413760
+      spriteID: bbfce7f44fa55f34aa626bc231a59985
+      internalID: 7252402004013892108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PANNEAU-FX_5
+      name: LOUP-FX_6
       rect:
         serializedVersion: 2
         x: 1024
@@ -244,14 +280,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f89ba8420ea6ab943841c0fd627fcf3e
-      internalID: 2785979893011430338
+      spriteID: cd145e30619c9bd4da8152f12974ae02
+      internalID: -2882231245403682056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PANNEAU-FX_6
+      name: LOUP-FX_7
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5438740ef3a2a2e49a05cbb4991ce966
+      internalID: -5148258295058172737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LOUP-FX_8
       rect:
         serializedVersion: 2
         x: 0
@@ -265,14 +322,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf470d3a5210c794da0cc5b8d6ae79c8
-      internalID: -8413763322637773600
+      spriteID: 93311fc934bcbcb49986122c30ad53a4
+      internalID: -9016444866416359103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PANNEAU-FX_7
+      name: LOUP-FX_9
       rect:
         serializedVersion: 2
         x: 512
@@ -286,29 +343,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e5d2987aa8ae46499e1bcfeea099c04
-      internalID: 362984003561982265
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PANNEAU-FX_8
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 522569ceda470bc4897f61853962c6a1
-      internalID: -7230492115475820849
+      spriteID: 865a04f0a7005ea4e89804cf2420e425
+      internalID: 7019984161170487316
       vertices: []
       indices: 
       edges: []

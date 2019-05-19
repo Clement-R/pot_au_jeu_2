@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using DG.Tweening;
+
 public class AgentMovementBehaviour : MonoBehaviour
 {
     public Action OnPathEnd;
@@ -12,42 +14,20 @@ public class AgentMovementBehaviour : MonoBehaviour
         private set;
     }
 
-    private Coroutine m_currentMovement = null;
+    [SerializeField] GameObject m_exclamation;
+
+    private Tween m_currentMovement = null;
+    private Vector3 m_endScale;
 
     private void Start()
     {
         GameStateManager.Instance.OnGameOver += GameOver;
 
-        //if(waypoints.Count > 0)
-        //{
-        //    Vector3[] path = new Vector3[waypoints.Count];
-        //    for (int i = 0; i < waypoints.Count; i++)
-        //    {
-        //        path[i] = waypoints[i].position;
-        //    }
-
-        //    m_currentMovement = StartCoroutine(
-        //        _MoveToPosition(
-        //            AgentSettings.Instance.CenterTransform.position,
-        //            AgentSettings.Instance.TimeToMoveFromSideToCenter,
-        //            () => {
-        //                Debug.Log("GO ON PATH");
-        //                var ok = transform.DOPath(path, AgentSettings.Instance.TimeToMoveFromCenterToCreature, PathType.Linear, PathMode.Full3D);
-        //                return;
-        //            }
-        //        )
-        //    );
-        //    //transform.DOPath(waypoints.ToArray(), AgentSettings.Instance.TimeToMoveFromCenterToCreature, PathType.CubicBezier, PathMode.Full3D);
-        //    //return;
-        //}
-
-        m_currentMovement = StartCoroutine(
-            _MoveToPosition(
-                AgentSettings.Instance.CenterTransform.position,
-                AgentSettings.Instance.TimeToMoveFromSideToCenter,
-                MoveToSignDirection
-            )
-        );
+        m_currentMovement = transform.DOPath(AgentSettings.Instance.PathToCenter,
+                                             AgentSettings.Instance.TimeToMoveFromSideToCenter,
+                                             PathType.Linear)
+                                     .OnComplete(MoveToSignDirection)
+                                     .SetEase(Ease.Linear);
     }
 
     private void OnDestroy()
@@ -58,62 +38,66 @@ public class AgentMovementBehaviour : MonoBehaviour
 
     private void GameOver()
     {
-        StopCoroutine(m_currentMovement);
+        m_currentMovement.Kill();
     }
 
-    private IEnumerator _MoveToPosition(Vector2 p_position, float p_timeToMove, Action OnMovementEnd, bool p_scaling = false)
+    private IEnumerator _ScaleAlongJourney(Tween p_tween)
     {
-        Vector2 currentPos = transform.position;
         Vector2 startScale = transform.localScale;
-        Vector2 endScale = transform.localScale * AgentSettings.Instance.ScaleFactorAtEndPath;
+        m_endScale = transform.localScale * AgentSettings.Instance.ScaleFactorAtEndPath;
 
-        var t = 0f;
-        while (t < 1)
+        float t = 0f;
+        float duration = p_tween.Duration();
+
+        while (t < duration)
         {
-            t += Time.deltaTime / p_timeToMove;
-            transform.position = Vector2.Lerp(currentPos, p_position, t);
-            if(p_scaling)
-                transform.localScale = Vector2.Lerp(startScale, endScale, t);
+            transform.localScale = Vector2.Lerp(startScale, m_endScale, t / duration);
             yield return null;
+            t += Time.deltaTime;
         }
 
-        OnMovementEnd?.Invoke();
+        transform.localScale = m_endScale;
+    }
+
+    private IEnumerator _ShowExclamation()
+    {
+        m_exclamation.SetActive(true);
+        yield return new WaitForSeconds(AgentSettings.Instance.ExclamationDuration);
+        m_exclamation.SetActive(false);
     }
 
     private void MoveToSignDirection()
     {
-        Debug.Log("Now move to sign direction");
-
-        Vector2 finalPosition = Vector2.zero;
+        Vector3[] path = new Vector3[0];
 
         Direction = AgentSettings.Instance.GetSignDirection();
+
+        StartCoroutine(_ShowExclamation());
 
         switch (Direction)
         {
             case EDirection.LEFT:
-                finalPosition = AgentSettings.Instance.LeftPathTransform.position;
+                path = AgentSettings.Instance.PathToLeft;
                 break;
             case EDirection.MIDDLE:
-                finalPosition = AgentSettings.Instance.MiddlePathTransform.position;
+                path = AgentSettings.Instance.PathToMiddle;
                 break;
             case EDirection.RIGHT:
-                finalPosition = AgentSettings.Instance.RighPathTransform.position;
+                path = AgentSettings.Instance.PathToRight;
                 break;
         }
 
-        m_currentMovement = StartCoroutine(
-            _MoveToPosition(
-                finalPosition,
-                AgentSettings.Instance.TimeToMoveFromCenterToCreature,
-                PathEnd,
-                true
-            )
-        );
+        m_currentMovement = transform.DOPath(path,
+                                             AgentSettings.Instance.TimeToMoveFromCenterToCreature,
+                                             PathType.Linear)
+                                     .OnComplete(PathEnd)
+                                     .SetEase(Ease.Linear);
+        StartCoroutine(_ScaleAlongJourney(m_currentMovement));
     }
 
     private void PathEnd()
     {
         OnPathEnd?.Invoke();
-        Destroy(gameObject);
+        Destroy(gameObject, 0.2f);
     }
 }

@@ -39,10 +39,10 @@ public class SatisfactionGaugeBehaviour : MonoBehaviour
         switch (m_mood)
         {
             case ECreatureMood.GOOD:
-                ChangeInfluence(0.1f);
+                ChangeInfluence(0.05f);
                 break;
             case ECreatureMood.BAD:
-                ChangeInfluence(-0.1f);
+                ChangeInfluence(-0.05f);
                 break;
         }
     }
